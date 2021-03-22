@@ -1,9 +1,9 @@
 import numpy as np
 
-from libs.chromosome.chromosome_modifier import ChromosomeModifier
+from chromosome_modifier import ChromosomeModifier
 from random import randrange
 
-from libs.chromosome.cross_types import CrossTypes
+from cross_types import CrossTypes
 
 
 class CrossService:

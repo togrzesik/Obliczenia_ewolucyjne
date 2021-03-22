@@ -2,24 +2,18 @@ import time
 
 import numpy as np
 
-from libs.algorithm.function import Function
-from libs.chromosome.chromosome_decoder import ChromosomeDecoder
-from libs.chromosome.cross_service import CrossService
-from libs.chromosome.inversion_service import InversionService
-from libs.chromosome.mutation_service import MutationService
-from libs.elite.elite_strategy import EliteStrategy
-from libs.generator.population_generator import PopulationGenerator
-from libs.selection.selection_service import SelectionService
+from function import Function
+from chromosome.chromosome_decoder import ChromosomeDecoder
+from chromosome.cross_service import CrossService
+from chromosome.inversion_service import InversionService
+from chromosome.mutation_service import MutationService
 
 
 class GeneticAlgorithm:
 
     def __init__(self, algorithm_configuration):
         self.__algorithm_configuration = algorithm_configuration
-        self.__population_generator = PopulationGenerator(self.__algorithm_configuration)
         self.__function = Function(self.__algorithm_configuration)
-        self.__elite_strategy = EliteStrategy(self.__algorithm_configuration)
-        self.__selection_service = SelectionService(self.__algorithm_configuration)
         self.__cross_service = CrossService(self.__algorithm_configuration)
         self.__mutation_service = MutationService(self.__algorithm_configuration)
         self.__inversion_service = InversionService(self.__algorithm_configuration)

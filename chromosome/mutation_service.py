@@ -1,7 +1,5 @@
-import numpy as np
-
-from libs.chromosome.chromosome_modifier import ChromosomeModifier
-from libs.chromosome.mutation_types import MutationTypes
+from chromosome_modifier import ChromosomeModifier
+from mutation_types import MutationTypes
 
 
 class MutationService:

@@ -1,7 +1,5 @@
-from libs.algorithm.genetic_algorithm import GeneticAlgorithm
+from genetic_algorithm import GeneticAlgorithm
 from libs.generator.base_file_name_generator import BaseFileNameGenerator
-from libs.io.file_writer import FileWriter
-from libs.plot.plot_drawer import PlotDrawer
 
 
 class Genetic:
@@ -9,8 +7,6 @@ class Genetic:
     def __init__(self, alg_config):
         self.__gen_alg = GeneticAlgorithm(alg_config)
         self.__base_file_name_generator = BaseFileNameGenerator(alg_config)
-        self.__file_writer = FileWriter()
-        self.__plot_drawer = PlotDrawer()
 
         decoded_best_chromosome, solution_best_value, list_best, list_mean, list_std, elapsed_time \
             = self.__gen_alg.evolve()
