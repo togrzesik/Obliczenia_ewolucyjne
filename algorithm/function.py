@@ -1,6 +1,6 @@
 import numpy as np
 
-from chromosome_decoder import ChromosomeDecoder
+from chromosome.chromosome_decoder import ChromosomeDecoder
 
 
 class Function:
