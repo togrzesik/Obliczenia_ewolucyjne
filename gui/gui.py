@@ -3,7 +3,7 @@ from algorithm_configuration_provider import AlgorithmConfigurationProvider
 from mutation_types import MutationTypes
 from cross_types import CrossTypes
 from selection_types import SelectionTypes
-
+from PyQt5.QtWidgets import QWidget, QLabel, QLineEdit, QFormLayout, QPushButton, QComboBox, QCheckBox, QMessageBox
 
 class Gui:
     def __init__(self):
@@ -111,3 +111,13 @@ class Gui:
 
     def __set_background(self):
         self.__app.configure(bg="black")
+
+    @staticmethod
+    def __print_result(genetic):
+        msg = QMessageBox()
+        msg.setWindowTitle("Result")
+        msg.setText(f"Found solution in {round(genetic.elapsed_time, 4)} seconds\n\n"
+                    f"f({round(genetic.decoded_best_chromosome[0], 4)}, "
+                    f"{round(genetic.decoded_best_chromosome[1], 4)})"
+                    f" = {round(genetic.solution_best_value, 4)}")
+        x = msg.exec_()
