@@ -172,13 +172,7 @@ class MainGui(QWidget):
             self.__get_chromosome_config(),
             float(self.__a_range_input.text()),
             float(self.__b_range_input.text()),
-            int(self.__bits_amount_input.text()),
-            int(self.__pop_amount_input.text()),
-            int(self.__epoch_number_input.text()),
-            int(self.__selection_amount_input.text()),
-            int(self.__elite_amount_input.text()),
-            str(self.__selection_method_box.currentText()),
-            bool(self.__max_box.checkState()))
+            int(self.__bits_amount_input.text()))
 
     def __get_chromosome_config(self):
         return ChromosomeConfig(
