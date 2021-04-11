@@ -23,13 +23,13 @@ class Genetic:
         self.__file_writer.write_value_over_generation(list_best_file_name + '.txt', list_best)
         self.__plot_drawer.plot_value_over_generation(list_best_file_name + '.png', 'list_best', list_best)
 
-        list_best_file_name = self.__base_file_name_generator.get_file_name('list_mean')
-        self.__file_writer.write_value_over_generation(list_best_file_name + '.txt', list_best)
-        self.__plot_drawer.plot_value_over_generation(list_best_file_name + '.png', 'list_mean', list_best)
+        list_mean_file_name = self.__base_file_name_generator.get_file_name('list_mean')
+        self.__file_writer.write_value_over_generation(list_mean_file_name + '.txt', list_best)
+        self.__plot_drawer.plot_value_over_generation(list_mean_file_name + '.png', 'list_mean', list_mean)
 
-        list_best_file_name = self.__base_file_name_generator.get_file_name('list_std')
-        self.__file_writer.write_value_over_generation(list_best_file_name + '.txt', list_best)
-        self.__plot_drawer.plot_value_over_generation(list_best_file_name + '.png', 'list_std', list_best)
+        list_std_file_name = self.__base_file_name_generator.get_file_name('list_std')
+        self.__file_writer.write_value_over_generation(list_std_file_name + '.txt', list_best)
+        self.__plot_drawer.plot_value_over_generation(list_std_file_name + '.png', 'list_std', list_std)
 
     @property
     def decoded_best_chromosome(self):
