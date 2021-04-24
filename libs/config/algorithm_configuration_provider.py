@@ -18,12 +18,15 @@ class AlgorithmConfigurationProvider:
         self.__is_maximization = is_maximization
 
     def __calculate_dx(self):
+        if self.__bits_number == 0:
+            return 1 / float('inf')
         return (self.__right_range_number - self.__left_range_number) / (2**self.__bits_number - 1)
 
     def __validate_population_number(self, population_number):
-        if population_number > 2**(self.__bits_number * self.__variables_number):
-            raise Exception('Population number cannot be higher '
-                            'than maximum possible numbers that can be encoded binary')
+        if self.__bits_number != 0:
+            if population_number > 2**(self.__bits_number * self.__variables_number):
+                raise Exception('Population number cannot be higher '
+                                'than maximum possible numbers that can be encoded binary')
         return population_number
 
     @property

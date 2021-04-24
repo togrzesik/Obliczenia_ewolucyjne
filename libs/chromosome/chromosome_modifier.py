@@ -38,6 +38,34 @@ class ChromosomeModifier:
             return self.__homogeneous_cross(tab_a, tab_b)
         return tab_a, tab_b
 
+    def cross_arithmetic(self, first, second):
+        if np.random.random() < self.__chromosome_config.cross_prob:
+            k = np.random.random()
+            x1 = first[0]
+            y1 = first[1]
+            x2 = second[0]
+            y2 = second[1]
+            x1_new = k * x1 + (1 - k) * x2
+            y1_new = k * y1 + (1 - k) * y2
+            x2_new = (1 - k) * x1 + k * x2
+            y2_new = (1 - k) * y1 + k * y2
+            return np.array([x1_new, y1_new]), np.array([x2_new, y2_new])
+        return first, second
+
+    def cross_heuristic(self, first, second):
+        if np.random.random() < self.__chromosome_config.cross_prob:
+            x1 = first[0]
+            y1 = first[1]
+            x2 = second[0]
+            y2 = second[1]
+            if x2 > x1 and y2 > y1:
+                k = np.random.random()
+                x1_new = k * (x2 - x1) + x1
+                y1_new = k * (y2 - y1) + y1
+                return np.array([x1_new, y1_new])
+            return None
+        return first
+
     def __homogeneous_cross(self, tab_a, tab_b):
         for index in range(0, len(tab_a)):
             if np.random.random() < self.__chromosome_config.cross_prob:
@@ -65,6 +93,13 @@ class ChromosomeModifier:
         if np.random.random() < self.__chromosome_config.mut_prob:
             return self.__boundary_mutate_defined_elements(tab, self.TWO_MUTATIONS)
         return tab
+
+    def uniform_mutation(self, chromosome, left, right):
+        if np.random.random() < self.__chromosome_config.mut_prob:
+            index = np.random.randint(2)
+            value = np.random.uniform(low=left, high=right)
+            chromosome[index] = value
+        return chromosome
 
     def __boundary_mutate_defined_elements(self, tab, mutations_amount):
         for iterator in range(mutations_amount):

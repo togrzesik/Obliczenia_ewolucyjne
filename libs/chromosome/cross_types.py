@@ -5,5 +5,7 @@ class CrossTypes(Enum):
     ONE_POINT = 1,
     TWO_POINTS = 2,
     THREE_POINTS = 3,
-    HOMO = 4
+    HOMO = 4,
+    ARITHMETIC = 5,
+    HEURISTIC = 6
 

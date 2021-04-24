@@ -1,6 +1,7 @@
 import numpy as np
 
 from libs.chromosome.chromosome_decoder import ChromosomeDecoder
+from representation_types import RepresentationTypes
 
 
 class Function:
@@ -16,9 +17,12 @@ class Function:
         return (1.5 - x1 + x1*x2)**2 + (2.25 - x1 + x1*x2**2)**2 + (2.625 - x1 + x1*x2**3)**2
 
     def evaluate_chromosome(self, chromosome):
-        decoded_chromosome = self.__chromosome_decoder.decode_chromosome(chromosome)
-
-        return self.evaluate(decoded_chromosome)
+        representation_type = self.__algorithm_configuration.chromosome_config.representation_type
+        if representation_type == RepresentationTypes.BINARY.name:
+            decoded_chromosome = self.__chromosome_decoder.decode_chromosome(chromosome)
+            return self.evaluate(decoded_chromosome)
+        elif representation_type == RepresentationTypes.REAL.name:
+            return self.evaluate(chromosome)
 
     def evaluate_population(self, population):
         return np.apply_along_axis(self.evaluate_chromosome, 1, population)

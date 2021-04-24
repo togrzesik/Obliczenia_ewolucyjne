@@ -10,6 +10,7 @@ from libs.chromosome.mutation_service import MutationService
 from libs.elite.elite_strategy import EliteStrategy
 from libs.generator.population_generator import PopulationGenerator
 from libs.selection.selection_service import SelectionService
+from representation_types import RepresentationTypes
 
 
 class GeneticAlgorithm:
@@ -26,7 +27,10 @@ class GeneticAlgorithm:
         self.__chromosome_decoder = ChromosomeDecoder(self.__algorithm_configuration)
 
     def evolve(self):
-        population = self.__population_generator.generate_population()
+        if self.__algorithm_configuration.chromosome_config.representation_type == RepresentationTypes.BINARY.name:
+            population = self.__population_generator.generate_population()
+        elif self.__algorithm_configuration.chromosome_config.representation_type == RepresentationTypes.REAL.name:
+            population = self.__population_generator.generate_real_chromosome_population()
 
         solution_best_value = self.__initialize_solution_best_value()
         solution_best_chromosome = []
@@ -40,7 +44,8 @@ class GeneticAlgorithm:
             population = self.__selection_service.handle_selection(new_population_to_evaluate)
             population = self.__cross_service.handle_cross(population)
             population = self.__mutation_service.handle_mut(population)
-            population = self.__inversion_service.handle_inv(population)
+            if self.__algorithm_configuration.chromosome_config.representation_type == RepresentationTypes.BINARY.name:
+                population = self.__inversion_service.handle_inv(population)
 
             population = np.concatenate((population, best_chromosomes), axis=0)
 
@@ -58,7 +63,11 @@ class GeneticAlgorithm:
 
         end = time.time()
         elapsed_time = end - start
-        decoded_best_chromosome = self.__chromosome_decoder.decode_chromosome(solution_best_chromosome)
+
+        if self.__algorithm_configuration.chromosome_config.representation_type == RepresentationTypes.BINARY.name:
+            decoded_best_chromosome = self.__chromosome_decoder.decode_chromosome(solution_best_chromosome)
+        else:
+            decoded_best_chromosome = solution_best_chromosome
 
         return decoded_best_chromosome, solution_best_value, list_best, list_mean, list_std, elapsed_time
 

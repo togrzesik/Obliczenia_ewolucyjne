@@ -11,7 +11,7 @@ from libs.config.chromosome_config import ChromosomeConfig
 from libs.selection.selection_types import SelectionTypes
 
 
-class MainGui(QWidget):
+class GuiProject2(QWidget):
 
     def __init__(self):
         super().__init__()
@@ -64,10 +64,10 @@ class MainGui(QWidget):
         self.__pop_amount_input.setValidator(only_int_validator)
         self.__form_layout.addRow(self.__pop_amount_input)
 
-        self.__bits_amount_input = QLineEdit()
-        self.__bits_amount_input.setPlaceholderText('Number of bits')
-        self.__bits_amount_input.setValidator(only_int_validator)
-        self.__form_layout.addRow(self.__bits_amount_input)
+        # self.__bits_amount_input = QLineEdit()
+        # self.__bits_amount_input.setPlaceholderText('Number of bits')
+        # self.__bits_amount_input.setValidator(only_int_validator)
+        # self.__form_layout.addRow(self.__bits_amount_input)
 
         self.__epoch_number_input = QLineEdit()
         self.__epoch_number_input.setPlaceholderText('Epochs amount')
@@ -96,10 +96,10 @@ class MainGui(QWidget):
         self.__mutation_prob_input.setValidator(prop_double_validator)
         self.__form_layout.addRow(self.__mutation_prob_input)
 
-        self.__inversion_prob_input = QLineEdit()
-        self.__inversion_prob_input.setPlaceholderText('Inversion probability')
-        self.__inversion_prob_input.setValidator(prop_double_validator)
-        self.__form_layout.addRow(self.__inversion_prob_input)
+        # self.__inversion_prob_input = QLineEdit()
+        # self.__inversion_prob_input.setPlaceholderText('Inversion probability')
+        # self.__inversion_prob_input.setValidator(prop_double_validator)
+        # self.__form_layout.addRow(self.__inversion_prob_input)
 
     def __add_selection_method(self):
         selection_box_text = QLabel()
@@ -122,10 +122,8 @@ class MainGui(QWidget):
         self.__cross_method_box = QComboBox()
         self.__cross_method_box.addItems(
             [
-                CrossTypes.ONE_POINT.name,
-                CrossTypes.TWO_POINTS.name,
-                CrossTypes.THREE_POINTS.name,
-                CrossTypes.HOMO.name
+                CrossTypes.ARITHMETIC.name,
+                CrossTypes.HEURISTIC.name
             ]
         )
         self.__form_layout.addRow(cross_box_text)
@@ -137,8 +135,7 @@ class MainGui(QWidget):
         self.__mutation_method_box = QComboBox()
         self.__mutation_method_box.addItems(
             [
-                MutationTypes.ONE_POINT.name,
-                MutationTypes.TWO_POINTS.name
+                MutationTypes.UNIFORM.name,
             ]
         )
         self.__form_layout.addRow(mutation_box_text)
@@ -173,7 +170,7 @@ class MainGui(QWidget):
             self.__get_chromosome_config(),
             float(self.__a_range_input.text()),
             float(self.__b_range_input.text()),
-            int(self.__bits_amount_input.text()),
+            0,
             int(self.__pop_amount_input.text()),
             int(self.__epoch_number_input.text()),
             int(self.__selection_amount_input.text()),
@@ -187,6 +184,6 @@ class MainGui(QWidget):
             str(self.__mutation_method_box.currentText()),
             float(self.__cross_prob_input.text()),
             float(self.__mutation_prob_input.text()),
-            float(self.__inversion_prob_input.text()),
-            RepresentationTypes.BINARY.name
+            0,
+            RepresentationTypes.REAL.name
         )
